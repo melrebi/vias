@@ -1,13 +1,20 @@
 <!DOCTYPE html>
-<html>
+<html lang="es">
 <head>
+  <meta charset="UTF-8" />
   <title>Mapa de junio vías 2025</title>
-  <meta charset="utf-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <link rel="stylesheet" href="https://unpkg.com/leaflet/dist/leaflet.css" />
   <style>
-    html, body { height: 100%; margin: 0; padding: 0; }
-    #map { height: 100vh; width: 100vw; }
+    html, body {
+      height: 100%;
+      margin: 0;
+      padding: 0;
+    }
+    #map {
+      height: 100%;
+      width: 100%;
+    }
   </style>
 </head>
 <body>
@@ -15,27 +22,33 @@
 
   <script src="https://unpkg.com/leaflet/dist/leaflet.js"></script>
   <script>
-    // Crear el mapa sin establecer centro aún
+    // Crear el mapa
     var map = L.map('map');
 
-    // Capa base: imagen satelital de ESRI
+    // Añadir capa base satelital (ESRI)
     L.tileLayer('https://server.arcgisonline.com/ArcGIS/rest/services/World_Imagery/MapServer/tile/{z}/{y}/{x}', {
-      attribution: 'Tiles © Esri, Source: Esri, Maxar, Earthstar Geographics'
+      attribution: '© Esri, Maxar, Earthstar Geographics'
     }).addTo(map);
 
-    // Cargar y mostrar el GeoJSON
+    // Cargar archivo GeoJSON
     fetch('vias_junio_2025-web01.geojson')
-      .then(response => response.json())
-      .then(data => {
+      .then(function(response) {
+        if (!response.ok) {
+          throw new Error('No se pudo cargar el archivo GeoJSON');
+        }
+        return response.json();
+      })
+      .then(function(data) {
         var capaVias = L.geoJSON(data, {
           style: {
             color: '#ff6600',
-            weight: 2
+            weight: 3
           }
         }).addTo(map);
-
-        // Ajustar la vista al área cubierta por las vías
         map.fitBounds(capaVias.getBounds());
+      })
+      .catch(function(error) {
+        console.error('Error al cargar el GeoJSON:', error);
       });
   </script>
 </body>
