@@ -1,12 +1,12 @@
 <!DOCTYPE html>
 <html>
 <head>
-  <title>Mapa de junio vias 2025</title>
+  <title>Mapa de junio vías 2025</title>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <link rel="stylesheet" href="https://unpkg.com/leaflet/dist/leaflet.css" />
   <style>
-    html, body { height: 100%; margin: 0; }
+    html, body { height: 100%; margin: 0; padding: 0; }
     #map { height: 100vh; width: 100vw; }
   </style>
 </head>
@@ -15,41 +15,28 @@
 
   <script src="https://unpkg.com/leaflet/dist/leaflet.js"></script>
   <script>
-    var map = L.map('map').setView([0, 0], 2); // Cambia por coordenadas adecuadas
+    // Crear el mapa sin establecer centro aún
+    var map = L.map('map');
 
-    L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
-      attribution: 'Map data © OpenStreetMap contributors'
+    // Capa base: imagen satelital de ESRI
+    L.tileLayer('https://server.arcgisonline.com/ArcGIS/rest/services/World_Imagery/MapServer/tile/{z}/{y}/{x}', {
+      attribution: 'Tiles © Esri, Source: Esri, Maxar, Earthstar Geographics'
     }).addTo(map);
 
+    // Cargar y mostrar el GeoJSON
     fetch('vias_junio_2025-web01.geojson')
       .then(response => response.json())
       .then(data => {
-        var puntos = L.geoJSON(data).addTo(map);
-        map.fitBounds(puntos.getBounds());
+        var capaVias = L.geoJSON(data, {
+          style: {
+            color: '#ff6600',
+            weight: 2
+          }
+        }).addTo(map);
+
+        // Ajustar la vista al área cubierta por las vías
+        map.fitBounds(capaVias.getBounds());
       });
   </script>
-<script>
-  var map = L.map('map');
-
-  // Capa base: imagen satelital de ESRI
-  L.tileLayer('https://server.arcgisonline.com/ArcGIS/rest/services/World_Imagery/MapServer/tile/{z}/{y}/{x}', {
-    attribution: 'Tiles © Esri, Source: Esri, Maxar, Earthstar Geographics'
-  }).addTo(map);
-
-  // Cargar GeoJSON y centrar el mapa en el área de las vías
-  fetch('vias_junio_2025-web01.geojson')
-    .then(response => response.json())
-    .then(data => {
-      var capaVias = L.geoJSON(data, {
-        style: {
-          color: '#ff6600',
-          weight: 2
-        }
-      }).addTo(map);
-      
-      // Centrar el mapa al área cubierta por las vías
-      map.fitBounds(capaVias.getBounds());
-    });
-</script>
 </body>
 </html>
