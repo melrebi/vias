@@ -1,0 +1,52 @@
+<!DOCTYPE qgis PUBLIC 'http://mrcc.com/qgis.dtd' 'SYSTEM'>
+<qgis version="3.40.2-Bratislava">
+  <identifier>ACTUALIZACION_VIAS</identifier>
+  <parentidentifier></parentidentifier>
+  <language>SPA</language>
+  <type>dataset</type>
+  <title>ACTUALIZACION_VIAS</title>
+  <abstract>Base de datos de las Areas Viales del Muncipio de Quetzaltenango de la cual se actualiza dicha base de datos conforme al catastro municipal.</abstract>
+  <keywords vocabulary="gmd:topicCategory">
+    <keyword>Planificación catastral</keyword>
+    <keyword>REQUIRED: Common-use word or phrase used to describe the subject of the data set.</keyword>
+  </keywords>
+  <contact>
+    <name>Ing. Melvin René Batz</name>
+    <organization>Municipalidad de Quetzaltenango</organization>
+    <position>Enumerador Supervisor</position>
+    <voice></voice>
+    <fax></fax>
+    <email></email>
+    <role>distributor</role>
+  </contact>
+  <links>
+    <link url="file://\\HP-DXELA02\G\004_USIG\04_USIG2012\POT_QUETZALTENANGO\SHP_POT_QUETZALTENANGO\000_QUETGO_CARRETERAS_TSE" size="" name="Shapefile" description="" mimeType="" type="Local Area Network" format=""/>
+  </links>
+  <dates/>
+  <fees></fees>
+  <constraints type="Acceso">REQUIRED: Restrictions and legal prerequisites for accessing the data set.</constraints>
+  <rights>REQUIRED: Restrictions and legal prerequisites for using the data set after access is granted.</rights>
+  <encoding></encoding>
+  <crs>
+    <spatialrefsys nativeFormat="Wkt">
+      <wkt></wkt>
+      <proj4></proj4>
+      <srsid>0</srsid>
+      <srid>0</srid>
+      <authid></authid>
+      <description></description>
+      <projectionacronym></projectionacronym>
+      <ellipsoidacronym></ellipsoidacronym>
+      <geographicflag>false</geographicflag>
+    </spatialrefsys>
+  </crs>
+  <extent>
+    <spatial minx="-91.56779500000000382" minz="0" maxz="0" maxx="-91.46127500000000055" crs="EPSG:4326" miny="14.81798500000000018" maxy="14.87332800000000077" dimensions="2"/>
+    <temporal>
+      <period>
+        <start></start>
+        <end></end>
+      </period>
+    </temporal>
+  </extent>
+</qgis>
