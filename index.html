@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
 <head>
-  <title>Mapa de Puntos</title>
+  <title>Mapa de junio vias 2025</title>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <link rel="stylesheet" href="https://unpkg.com/leaflet/dist/leaflet.css" />
@@ -21,12 +21,35 @@
       attribution: 'Map data © OpenStreetMap contributors'
     }).addTo(map);
 
-    fetch('puntos.geojson')
+    fetch('vias_junio_2025-web01.geojson')
       .then(response => response.json())
       .then(data => {
         var puntos = L.geoJSON(data).addTo(map);
         map.fitBounds(puntos.getBounds());
       });
   </script>
+<script>
+  var map = L.map('map');
+
+  // Capa base: imagen satelital de ESRI
+  L.tileLayer('https://server.arcgisonline.com/ArcGIS/rest/services/World_Imagery/MapServer/tile/{z}/{y}/{x}', {
+    attribution: 'Tiles © Esri, Source: Esri, Maxar, Earthstar Geographics'
+  }).addTo(map);
+
+  // Cargar GeoJSON y centrar el mapa en el área de las vías
+  fetch('vias_junio_2025-web01.geojson')
+    .then(response => response.json())
+    .then(data => {
+      var capaVias = L.geoJSON(data, {
+        style: {
+          color: '#ff6600',
+          weight: 2
+        }
+      }).addTo(map);
+      
+      // Centrar el mapa al área cubierta por las vías
+      map.fitBounds(capaVias.getBounds());
+    });
+</script>
 </body>
 </html>
